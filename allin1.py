@@ -1,0 +1,125 @@
+import tensorflow as tf
+from tensorflow.keras.applications.mobilenet import MobileNet
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions
+import numpy as np
+import os 
+from keras import Model
+import cv2 as cv
+from keras.layers import Dense
+import matplotlib as plt
+from skimage.transform import resize
+from tensorflow.keras.preprocessing import image
+model= MobileNet(weights= 'imagenet')
+data= np.empty((120, 224, 224,3))
+for i in range(40):
+#    print('Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
+    
+#    assert os.path.exists("/Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg".format(i+1))
+    im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
+    im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
+    im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
+    im= preprocess_input(im)
+    im= cv.resize(im, (224, 224))
+    data[i]=im
+for i in range(40):
+    im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/oracle_bone/o{}.jpeg'.format(i+1))
+    im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
+    im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
+    im= preprocess_input(im)
+    im= resize(im, output_shape=(224, 224))
+    data[i+40]=im
+for i in range(40):
+    im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/Random_Symbols/f{}.jpeg'.format(i+1))
+    im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
+    im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
+    im= preprocess_input(im)
+    im= resize(im, output_shape=(224, 224))
+    data[i+80]=im
+labels= np.empty(120, dtype=int)
+labels[0:40]=0
+labels[40:80]=1
+labels[80:]=2
+
+
+training_data= np.empty((90, 224, 224, 3))
+training_data[:30]= data[:30]
+training_data[30:60]= data[40:70]
+training_data[60:]= data[80:110]
+training_labels= np.empty(90)
+training_labels[:30]=0
+training_labels[30:60]=1
+training_labels[60:]=2
+validation_data= np.empty((30, 224, 224, 3))
+validation_data[:10]= data[30:40]
+validation_data[10:20]= data[70:80]
+validation_data[20:]= data[110:120]
+validation_labels= np.empty(30)
+validation_labels[:10]= 0
+validation_labels[10:20]= 1
+validation_labels[20:]= 2
+
+
+
+
+MyOutput = Dense(3, activation= 'softmax')
+MyOutput= MyOutput(model.layers[-2].output)
+myInput= model.input
+myModel= Model(inputs= myInput, outputs= MyOutput)
+for layer in myModel.layers[:-1]:
+    layer.trainable= False
+
+myModel.compile(
+    loss= 'sparse_categorical_crossentropy',
+    optimizer= 'adam',
+    metrics= ['accuracy']
+)
+
+myModel.fit(
+    x=training_data,
+    y=training_labels,
+    epochs=30,
+    verbose=2,
+    validation_data=(validation_data, validation_labels)
+)
+
+predictions= myModel.predict(training_data)
+
+print("YAAAAAAAAAAAAAAAAAAAAAAAAAAY")
+
+
+camera= cv.VideoCapture(0)
+while True:
+    isTrue, frame=camera.read()
+    sample_image= cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    sample_image= cv.cvtColor(sample_image, cv.COLOR_GRAY2BGR)
+    #img = tf.keras.utils.load_img(frame, target_size=(224, 224))
+    img= preprocess_input(sample_image)
+    img_arr= np.empty((1, 224, 224, 3))
+    img_arr[0]= resize(img, output_shape=(224, 224))
+    #x = tf.keras.utils.img_to_array(img)
+    #x = np.expand_dims(x, axis=0)
+    #x = preprocess_input(x)
+    preds = myModel.predict(img_arr)
+    print("prediction value is ", preds)
+    decoded_preds = np.argmax(preds[0])
+    if decoded_preds==0:
+        print("robocon logo")
+    elif decoded_preds==1:
+        print("oracle bone")
+    elif decoded_preds==2:
+        print("random")
+    else:
+        print("i dont know")
+    
+    '''for i, (imagenet_id, label, score) in enumerate(decoded_preds):
+        print(f"{i+1}. {label}: {score:.4f}")
+        plt.imshow(img)
+    '''
+    #plt.axis('off')
+    #plt.title(f"Prediction: {decoded_preds[0][1]} ({decoded_preds[0][2]*100:.2f}%)")
+    #plt.show()
+    cv.imshow('video',frame)
+    if cv.waitKey(20) & 0xFF==ord('d'):
+        break
+camera.release()
+cv.destroyAllWindows()
