@@ -10,7 +10,7 @@ import matplotlib as plt
 from skimage.transform import resize
 from tensorflow.keras.preprocessing import image
 model= MobileNet(weights= 'imagenet')
-data= np.empty((120, 224, 224,3))
+data= np.empty((150, 224, 224,3))
 for i in range(40):
 #    print('Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
     
@@ -21,42 +21,42 @@ for i in range(40):
     im= preprocess_input(im)
     im= cv.resize(im, (224, 224))
     data[i]=im
-for i in range(40):
+for i in range(55):
     im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/oracle_bone/o{}.jpeg'.format(i+1))
     im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
     im= preprocess_input(im)
     im= resize(im, output_shape=(224, 224))
     data[i+40]=im
-for i in range(40):
+for i in range(55):
     im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/Random_Symbols/f{}.jpeg'.format(i+1))
     im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
     im= preprocess_input(im)
     im= resize(im, output_shape=(224, 224))
-    data[i+80]=im
-labels= np.empty(120, dtype=int)
+    data[i+95]=im
+labels= np.empty(150, dtype=int)
 labels[0:40]=0
-labels[40:80]=1
-labels[80:]=2
+labels[40:95]=1
+labels[95:]=2
 
 
-training_data= np.empty((90, 224, 224, 3))
-training_data[:30]= data[:30]
-training_data[30:60]= data[40:70]
-training_data[60:]= data[80:110]
-training_labels= np.empty(90)
-training_labels[:30]=0
-training_labels[30:60]=1
-training_labels[60:]=2
+training_data= np.empty((120, 224, 224, 3))
+training_data[:32]= data[:32]
+training_data[32:76]= data[40:84]
+training_data[76:]= data[95:139]
+training_labels= np.empty(120)
+training_labels[:32]=0
+training_labels[32:76]=1
+training_labels[76:]=2
 validation_data= np.empty((30, 224, 224, 3))
-validation_data[:10]= data[30:40]
-validation_data[10:20]= data[70:80]
-validation_data[20:]= data[110:120]
+validation_data[:8]= data[32:40]
+validation_data[8:19]= data[84:95]
+validation_data[19:]= data[139:150]
 validation_labels= np.empty(30)
-validation_labels[:10]= 0
-validation_labels[10:20]= 1
-validation_labels[20:]= 2
+validation_labels[:8]= 0
+validation_labels[8:19]= 1
+validation_labels[19:]= 2
 
 
 
