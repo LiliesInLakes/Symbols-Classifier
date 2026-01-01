@@ -79,7 +79,7 @@ myModel.fit(
 
 predictions= myModel.predict(training_data)
 
-print("YAAAAAAAAAAAAAAAAAAAAAAAAAAY")
+print("training is done. opening camera now")
 
 
 camera= cv.VideoCapture(0)
