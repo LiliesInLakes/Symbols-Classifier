@@ -2,19 +2,14 @@ import tensorflow as tf
 from tensorflow.keras.applications.mobilenet import MobileNet
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions
 import numpy as np
-import os 
 from keras import Model
 import cv2 as cv
 from keras.layers import Dense
-import matplotlib as plt
 from skimage.transform import resize
 from tensorflow.keras.preprocessing import image
 model= MobileNet(weights= 'imagenet')
 data= np.empty((150, 224, 224,3))
 for i in range(40):
-#    print('Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
-    
-#    assert os.path.exists("/Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg".format(i+1))
     im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
     im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
