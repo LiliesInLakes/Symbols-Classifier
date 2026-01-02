@@ -10,21 +10,21 @@ from tensorflow.keras.preprocessing import image
 model= MobileNet(weights= 'imagenet')
 data= np.empty((150, 224, 224,3))
 for i in range(40):
-    im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
+    im= cv.imread('./my_data/Robocon_Logo/r{}.jpeg'.format(i+1))
     im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
     im= preprocess_input(im)
     im= cv.resize(im, (224, 224))
     data[i]=im
 for i in range(55):
-    im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/oracle_bone/o{}.jpeg'.format(i+1))
+    im= cv.imread('./my_data/oracle_bone/o{}.jpeg'.format(i+1))
     im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
     im= preprocess_input(im)
     im= resize(im, output_shape=(224, 224))
     data[i+40]=im
 for i in range(55):
-    im= cv.imread('/Users/avni/Desktop/mobilenet/my_data/Random_Symbols/f{}.jpeg'.format(i+1))
+    im= cv.imread('./my_data/Random_Symbols/f{}.jpeg'.format(i+1))
     im = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
     im = cv.cvtColor(im , cv.COLOR_GRAY2BGR)
     im= preprocess_input(im)
