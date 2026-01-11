@@ -36,4 +36,4 @@ Download the code in the same folder
 Download tensorflow, opencv, numpy, skimage, keras
 Run it
 
-I am also attaching the inference script that should work with an onnx model which i will use once i have figured out the issues. The keras model contains the 1000 classes. The onnx model contains 1000 classes
+I am also attaching the inference script that should work with an onnx model which i will use once i have figured out the issues. The keras model and the onnx model are also uploaded
