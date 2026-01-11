@@ -17,7 +17,7 @@ I have used tensorflow, keras, mobilenet, numpy, skimage, onnx, onnxruntime, ope
 Since my initial attempt was working successfully, I tried to improve the model further. I explored torchvision but decided to stick to mobilenet in the end. I improved my understanding of image classification and object detection and tried to understand how a CNN works. I explored using a more custom model intead of Imagenet. I also tried to train and predict in different code files by saving the model. My model was in keras and then was converted into onnx. The keras model saved 1000 classes since my I modified ImageNet to give predictions. Keras model does not have the capability to save the class indices while saving the model. They have to be saved separately and referred in the inference script. Another problem was that my onnx model was not running with my inference script.
 Since I didnt want to use AI, I read the docs of mobilenet, keras, torchvision, tensorflow and onnx and information given by google and microsoft, several blogs, searched stack overflow and reddit, searched in ML for dummies and Deep Learning (Goodfellow), watched videos on opencv and image classification. I found that onnx doesnt support .predict() function and needs a different inference script as compared to the keras model. Also, saving the classes in a separate file for the keras model and then using it to only get one of three outputs is an option. However, I am unsure of how that will translate in the onnx model. 
 
-The final submitted code is the amalgamtion of all my attempts.
+The final submitted code is the amalgamation of all my attempts.
 
 
 Things to work on
