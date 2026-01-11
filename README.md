@@ -4,10 +4,13 @@ For ABU Robocon 2026
 Problem statement
 
 
+
 For the ABU Robocon 2026, we need a code that will identify the input of the camera and classify it into three: Robocon logo, Oracle bone symbols and Random or Fake symbols. To do this, I have utilised CNN.
 
 
+
 Project report
+
 
 
 **NONE OF THE CODE SUBMITTED HERE IS AI GENERATED**
@@ -19,7 +22,9 @@ Since I didnt want to use AI, I read the docs of mobilenet, keras, torchvision, 
 The final submitted code is the amalgamation of all my attempts.
 
 
+
 Things to work on
+
 
 
 try data augmentation
@@ -30,7 +35,9 @@ try to make it work with onnx and keras saved models
 give confidence score
 
 
+
 To deploy
+
 
 
 Create a folder
