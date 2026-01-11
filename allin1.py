@@ -97,19 +97,8 @@ while True:
     preds = myModel.predict(img_arr)
     print("prediction value is ", preds)
     decoded_preds = np.argmax(preds[0])
-    if decoded_preds==0:
-        print("robocon logo")
-    elif decoded_preds==1:
-        print("oracle bone")
-    elif decoded_preds==2:
-        print("random")
-    else:
-        print("i dont know")
+   
     
-    '''for i, (imagenet_id, label, score) in enumerate(decoded_preds):
-        print(f"{i+1}. {label}: {score:.4f}")
-        plt.imshow(img)
-    '''
     #plt.axis('off')
     #plt.title(f"Prediction: {decoded_preds[0][1]} ({decoded_preds[0][2]*100:.2f}%)")
     #plt.show()
