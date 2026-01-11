@@ -7,15 +7,6 @@ Problem statement
 For the ABU Robocon 2026, we need a code that will identify the input of the camera and classify it into three: Robocon logo, Oracle bone symbols and Random or Fake symbols. To do this, i have utilised cnn.
 
 
-To deploy
-
-
-Create a folder
-Download the zip file containing the data on which the model is trained in that folder. Extract the data.
-Download the code in the same folder
-Download tensorflow, opencv, numpy, skimage, keras
-
-
 Project report
 
 
@@ -34,3 +25,15 @@ improve accuracy of classification of fake symbols.
 try image processing to boost output
 try to make it work with onnx and keras saved models
 give confidence score
+
+
+To deploy
+
+
+Create a folder
+Download the zip file containing the data on which the model is trained in that folder. Extract the data.
+Download the code in the same folder
+Download tensorflow, opencv, numpy, skimage, keras
+Run it
+
+I am also attaching the inference script that should work with an onnx model which i will use once i have figured out the issues. The keras model contains the 1000 classes. The onnx model contains 1000 classes
