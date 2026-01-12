@@ -97,7 +97,8 @@ while True:
     preds = myModel.predict(img_arr)
     print("prediction value is ", preds)
     decoded_preds = np.argmax(preds[0])
-   
+    labels=["robocon logo", "oracle bone", "random"]
+    print(labels[decoded_preds])
     
     #plt.axis('off')
     #plt.title(f"Prediction: {decoded_preds[0][1]} ({decoded_preds[0][2]*100:.2f}%)")
