@@ -1,0 +1,10 @@
+import tensorflow as tf
+import tf2onnx
+import onnx
+from tensorflow import keras
+from keras.models import load_model
+
+model = load_model('path/to/keras_model_you_want_to_convert.h5')
+
+onnx_model, _ = tf2onnx.convert.from_keras(model)
+onnx.save(onnx_model, 'new_model.onnx')
