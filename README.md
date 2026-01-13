@@ -48,4 +48,4 @@ Run the code
 
 It's that simple.
 
-I am also attaching the inference script that should work with an onnx model. iis work in progress pending open issues described earlier. The keras model and the onnx model are also uploaded. Data base contains 120 images (55 each of fake and real and 40 of logo)
+I am also attaching the inference script that should work with an onnx model. It is work in progress pending open issues described earlier. The keras model and the onnx model are also uploaded. Data base contains 120 images (55 each of fake and real and 40 of logo)
